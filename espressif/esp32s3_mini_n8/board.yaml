@@ -1,0 +1,6 @@
+board:
+  name: esp32s3_mini_n8
+  full_name: ESP32-S3-MINI-N8
+  vendor: espressif
+  socs:
+  - name: esp32s3
