@@ -19,6 +19,7 @@
 		watchdog0 = &wdt0;
 		uart-0 = &uart0;
 		sw0 = &button0;
+		led-0 = &led0;
 	};
 	chosen {
 		zephyr,sram = &sram1;
