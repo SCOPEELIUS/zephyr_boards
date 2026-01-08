@@ -1,0 +1,97 @@
+/*
+* Copyright (c) 2026 Elius Faustine <elius@vortan.io>
+*
+* SPDX-License-Identifier: Apache-2.0
+*/
+
+/dts-v1/;
+#include <st/l0/stm32l051X8.dtsi>
+#include <st/l0/stm32l051c(6-8)tx-pinctrl.dtsi>
+#include <zephyr/dt-bindings/input/input-event-codes.h>
+
+/ {
+	model = "STMicroelectronics STM32L051C8T6 CUSTOM board";
+	compatible = "st,stm32l051c8t6";
+	
+	chosen {
+		zephyr,console = &usart1;
+		zephyr,shell-uart = &usart1;
+		zephyr,sram = &sram0;
+		zephyr,flash = &flash0;
+	};
+	
+	leds: leds {
+		compatible = "gpio-leds";
+		green_led_2: led_2 {
+			gpios = <&gpioa 0 GPIO_ACTIVE_HIGH>;
+			label = "User LD2";
+		};
+	};
+	
+	aliases {
+		led0 = &green_led_2;
+		eeprom-0 = &eeprom;
+	};
+};
+
+&clk_hse {
+	hse-bypass;
+	clock-frequency = <DT_FREQ_M(16)>; /* STLink 16MHz clock */
+	status = "okay";
+};
+
+&pll {
+	clocks = <&clk_hse>;
+	mul = <3>;
+	div = <4>;
+	status = "okay";
+};
+
+&rcc {
+	clocks = <&pll>;
+	clock-frequency = <DT_FREQ_M(12)>;
+	ahb-prescaler = <1>;
+	apb1-prescaler = <1>;
+	apb2-prescaler = <1>;
+};
+
+/* Due to limited available memory, don't enable gpioc gpiod and gpiof */
+/* (Test cases fail due to 'SRAM' region overflow) */
+&gpioc {
+	status = "disabled";
+};
+
+&gpiod {
+	status = "disabled";
+};
+
+&gpioh {
+	status = "disabled";
+};
+
+&gpioa {
+	status = "okay";
+};
+
+&gpiob {
+	status = "okay";
+};
+
+&usart1 {
+	pinctrl-0 = <&usart1_tx_pa9 &usart1_rx_pa10>;
+	pinctrl-names = "default";
+	current-speed = <115200>;
+	status = "disabled";
+};
+
+&lpuart1 {
+	pinctrl-0 = <&lpuart1_tx_pb10 &lpuart1_rx_pb11>;
+	pinctrl-names = "default";
+	current-speed = <115200>;
+	fifo-enable;
+	status = "disabled";
+};
+
+&eeprom {
+	status = "disabled";
+};

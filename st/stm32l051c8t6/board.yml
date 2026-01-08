@@ -1,0 +1,6 @@
+board:
+  name: stm32l051c8t6
+  full_name: STM32L051C8T6
+  vendor: st
+  socs:
+    - name: stm32l051xx

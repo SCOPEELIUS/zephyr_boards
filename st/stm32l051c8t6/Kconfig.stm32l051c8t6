@@ -1,0 +1,5 @@
+# Copyright (c) 2026 Elius Faustine <elius@vortan.io>
+# SPDX-License-Identifier: Apache-2.0
+
+config BOARD_STM32L051C8T6
+	select SOC_STM32L051XX
