@@ -1,0 +1,6 @@
+board:
+  name: stm32f103ret6
+  full_name: STM32F103RET6
+  vendor: st
+  socs:
+    - name: stm32f103ret6
