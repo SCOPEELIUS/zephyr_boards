@@ -1,0 +1,61 @@
+/*
+* Copyright (c) 2022-2025 ELIUS FAUSTINE
+*
+* SPDX-License-Identifier: Apache-2.0
+*/
+/dts-v1/;
+
+#include <espressif/esp32s3/esp32s3_mini_n4r2.dtsi>
+#include <zephyr/dt-bindings/input/input-event-codes.h>
+#include <zephyr/dt-bindings/input/esp32-touch-sensor-input.h>
+#include <espressif/partitions_0x0_amp.dtsi>
+#include "esp32s3_fh4r2-pinctrl.dtsi"
+
+/ {
+	model = "Espressif ESP32S3-MINI-N8 PROCPU";
+	compatible = "espressif,esp32s3";
+	
+	aliases {
+		watchdog0 = &wdt0;
+		uart-0 = &uart0;
+	};
+	chosen {
+		zephyr,sram = &sram1;
+		zephyr,console = &usb_serial;
+		zephyr,shell-uart = &usb_serial;
+		zephyr,flash = &flash0;
+		zephyr,code-partition = &slot0_partition;
+		zephyr,bt-hci = &esp32_bt_hci;
+	};
+};
+
+&uart0 {
+	status = "disabled";
+	current-speed = <115200>;
+	pinctrl-0 = <&uart0_default>;
+	pinctrl-names = "default";
+};
+
+&gpio0 {
+	status = "okay";
+};
+
+&wdt0 {
+	status = "okay";
+};
+
+&timer0 {
+	status = "okay";
+};
+
+&timer1 {
+	status = "disabled";
+};
+
+&usb_serial {
+	status = "okay";
+};
+
+&esp32_bt_hci {
+	status = "disabled";
+};

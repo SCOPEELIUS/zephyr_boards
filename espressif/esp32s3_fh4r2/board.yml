@@ -1,0 +1,6 @@
+board:
+  name: esp32s3_fh4r2
+  full_name: ESP32-S3-FH4R2
+  vendor: espressif
+  socs:
+  - name: esp32s3
